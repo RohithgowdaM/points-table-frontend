@@ -22,6 +22,13 @@ const AddCollege = () => {
         total_strength_ii: 0,
         total_strength_iii: 0,
         total_strength_iv: 0,
+        total_strength_pg: 0,
+        ped_name:"",
+        ped_qualification:"",
+        ped_years_of_service:0,
+        ped_years_of_service_in_institute:0,
+        ped_contact:"",
+        ped_awards:"",
         sports_dev_fees: 0,
         password: '',
         sports_facilities: '',
@@ -78,13 +85,25 @@ const AddCollege = () => {
         { label: "Basketball", value: "Basketball" },
         { label: "Volleyball", value: "Volleyball" },
     ];
-
+    const zone = [
+        { label: "Belagavi Division", value: "Belagavi Division" },
+        { label: "Kalaburgi Division", value: "Kalaburgi Division" },
+        { label: "Mysuru Division", value: "Mysuru Division" },
+        { label: "Mangalore Division", value: "Mangalore Division" },
+        { label: "Central Karnataka Division", value: "Central Karnataka Division" },
+        { label: "Bangalore South Division", value: "Bangalore South Division" },
+        { label: "Bangalore North Division", value: "Bangalore North Division" },
+        { label: "Bangalore Central Division", value: "Bangalore Central Division" }
+    ]
     const handleIndoorChange = (selectedOptions) => {
         setIndoorGames(selectedOptions.map((option) => option.value));
     }
 
     const handleOutdoorChange = (selectedOptions) => {
         setOutdoorGames(selectedOptions.map((option) => option.value));
+    }
+    const handleZoneChange = (selectedOption) => {
+        formData.name_of_the_zone = selectedOption.value;
     }
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -133,7 +152,7 @@ const AddCollege = () => {
             }
         }
     }
-    if(loading){
+    if (loading) {
         return (<div>loading.....</div>)
     }
     return (
@@ -154,7 +173,14 @@ const AddCollege = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="name_of_the_zone">Name Of The Zone</label>
-                    <input type="text" name="name_of_the_zone" id="name_of_the_zone" required onChange={handleChange} />
+                    <Select
+                        required
+                        options={zone}
+                        name='name_of_the_zone'
+                        onChange={handleZoneChange}
+                        id="name_of_the_zone"
+                        placeholder="Select the zone"
+                    />
                 </div>
                 <div className="form-group">
                     <label htmlFor="principle_name">Principle Name</label>
@@ -163,6 +189,30 @@ const AddCollege = () => {
                 <div className="form-group">
                     <label htmlFor="principle_contact_number">Principle Contact Number</label>
                     <input type="text" name="principle_contact_number" id="principle_contact_number" required onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ped_name">Physical Education Director Name</label>
+                    <input type="text" name="ped_name" id="ped_name" required onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ped_qualification">Physical Education Director Qualification</label>
+                    <input type="text" name="ped_qualification" id="ped_qualification" required onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ped_years_of_service">PED total service years</label>
+                    <input type="number" name="ped_years_of_service" id="ped_years_of_service" required onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ped_years_of_service_in_institute">PED total serviceyears in instituition</label>
+                    <input type="number" name="ped_years_of_service_in_institute" id="ped_years_of_service_in_institute" required onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ped_contact">PED Contact</label>
+                    <input type="Text" name="ped_contact" id="ped_contact" required onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="ped_awards">PED Awards</label>
+                    <input type="Text" name="ped_awards" id="ped_awards" required onChange={handleChange} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="sports_facilities">Sports Facilities</label>
@@ -174,6 +224,7 @@ const AddCollege = () => {
                                 isMulti
                                 options={indoorGamesList}
                                 onChange={handleIndoorChange}
+                                placeholder="Select the indoor games"
                                 value={indoorGamesList.filter((game) => indoorGames.includes(game.value))}
                             />
                         </div>
@@ -184,6 +235,7 @@ const AddCollege = () => {
                                 isMulti
                                 options={outdoorGamesList}
                                 onChange={handleOutdoorChange}
+                                placeholder="Select the outdoor games"
                                 value={outdoorGamesList.filter((game) => outdoorGames.includes(game.value))}
                             />
                         </div>
@@ -204,6 +256,10 @@ const AddCollege = () => {
                 <div className="form-group">
                     <label htmlFor="total_strength_iv">4th Year Strength</label>
                     <input type="number" name="total_strength_iv" id="total_strength_iv" required min='0' onChange={handleChange} />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="total_strength_pg">PG Strength</label>
+                    <input type="number" name="total_strength_pg" id="total_strength_pg" required min='0' onChange={handleChange} />
                 </div>
                 <div className="form-group">
                     <label htmlFor="sports_dev_fees">Sports Development Fees <span>&#8377;</span></label>
