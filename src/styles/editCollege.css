@@ -1,0 +1,107 @@
+/* General Layout and Form Styles */
+.edit-college-form {
+    width: 100%;
+    max-width: 900px; /* Set max-width for responsiveness */
+    margin: 0 auto; /* Center the form horizontally */
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+}
+
+.edit-college-form h2 {
+    font-size: 28px;
+    color: #007bff;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.edit-college-form h3 {
+    font-size: 22px;
+    color: #555;
+    margin-top: 20px;
+}
+
+.edit-college-form label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    display: block;
+    margin-bottom: 8px;
+}
+
+.edit-college-form input,
+.edit-college-form select {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.edit-college-form input:focus,
+.edit-college-form select:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+/* Form Layout */
+.form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 20px; /* Space out fields */
+}
+
+.submit-btn {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.edit-college-form button {
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: 100%; 
+    max-width: 200px;
+}
+
+.edit-college-form button:hover {
+    background-color: #0056b3;
+}
+
+.edit-college-form button:active {
+    background-color: #003366;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .edit-college-form {
+        padding: 20px;
+    }
+
+    .edit-college-form h2 {
+        font-size: 24px;
+    }
+
+    .edit-college-form h3 {
+        font-size: 18px;
+    }
+
+    .form-row {
+        gap: 15px;
+    }
+
+    .edit-college-form button {
+        max-width: 100%;
+    }
+}

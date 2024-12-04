@@ -5,7 +5,7 @@ import axios from "axios";
 const AdminDashboard = () => {
   const [adminID, setAdminID] = useState('');
   const [loading, setLoading] = useState(true)
-  const navigate = useNavigate(); // Use react-router's navigate for redirection
+  const navigate = useNavigate();
 
   useEffect(() => {
     const id = localStorage.getItem('userID');
@@ -20,11 +20,10 @@ const AdminDashboard = () => {
       }
 
       try {
-        console.log("Fetching dashboard data...");
         const response = await axios.get('http://localhost:5000/admin/dashboard', {
           headers: { Authorization: token },
         });
-        setLoading(false); // Stop loading after the API call completes
+        setLoading(false);
       } catch (error) {
         console.log("Message", error.response.data.error);
         if (error.response) {
@@ -38,17 +37,15 @@ const AdminDashboard = () => {
           }
         }
         navigate('/admin-login');
-        setLoading(false); // Stop loading after error handling
+        setLoading(false);
       }
     };
 
     fetchData();
 
-    // Set interval to fetch data every hour (60 minutes = 3600000 ms)
     const interval = setInterval(fetchData, 3600000);
     return () => clearInterval(interval);
   }, [navigate]);
-
 
   if (loading) {
     return <div>Loading...</div>;
@@ -63,10 +60,24 @@ const AdminDashboard = () => {
         </Link>
       </div>
       <div>
-        <button>Add Admin</button>
+        <Link to=''>
+          <button>Add Admin</button>
+        </Link>
       </div>
       <div>
-        <button>Edit College Details</button>
+        <Link to=''>
+          <button>Forgot/change Password of admins</button>
+        </Link>
+      </div>
+      <div>
+        <Link to=''>
+          <button>Forgot/Change Password of College</button>
+        </Link>
+      </div>
+      <div>
+        <Link to='/admin/editcollege'>
+          <button>Edit College Details</button>
+        </Link>
       </div>
       <div>
         <button>Delete College</button>

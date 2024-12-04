@@ -1,0 +1,106 @@
+/* General styling */
+.dashboard-container {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+.dashboard-title {
+    text-align: center;
+    font-size: 2em;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+.data-table th,
+.data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.data-table th {
+    background-color: #007bff;
+    color: white;
+    text-align: left;
+}
+
+.data-table td {
+    background-color: #f4f4f4;
+}
+
+/* Loading state */
+.loading {
+    text-align: center;
+    font-size: 1.5em;
+    color: #007bff;
+}
+
+/* Sports Facilities Section */
+.sports-facilities {
+    margin-top: 30px;
+    padding: 10px;
+    background-color: #f0f8ff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sports-facilities h2 {
+    font-size: 1.8em;
+    color: #007bff;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Facilities Container */
+.facilities-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+/* Facility Card */
+.facility-card {
+    width: 250px;
+    padding: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.facility-card:hover {
+    transform: scale(1.05);
+}
+
+/* Facility Type Header */
+.facility-type {
+    font-size: 1.5em;
+    color: #333;
+    margin-bottom: 10px;
+    text-align: center;
+    text-transform: capitalize;
+}
+
+/* Games List */
+.games-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    color: #555;
+}
+
+.games-list .game-item {
+    font-size: 1em;
+    margin: 5px 0;
+    text-align: center;
+    color: #555;
+}
