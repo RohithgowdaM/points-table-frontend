@@ -3,7 +3,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Select from "react-select";
 import { indoorGamesList, outdoorGamesList, zone } from '../data/getOptions';
-import '../styles/editCollege.css'; // Import the CSS file
+import '../styles/editCollege.css';
+import { fetchDashboardData, fetchCollegeOptions } from '../utils/apputils';
 
 const EditCollege = () => {
     const [options, setOptions] = useState([]);
@@ -13,56 +14,18 @@ const EditCollege = () => {
     const [collegeDetails, setCollegeDetails] = useState(null);
 
     useEffect(() => {
-        const fetchData = async () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                setLoading(false);
-                navigate('/admin-login');
-                return;
-            }
-            try {
-                const response = await axios.get('http://localhost:5000/admin/dashboard', {
-                    headers: { Authorization: token },
-                });
-                setLoading(false);
-            } catch (error) {
-                console.log("Message", error.response.data.error);
-                if (error.response) {
-                    if (error.response.status === 401 && error.response.data.error === 'Token Expired') {
-                        alert('Session expired. Please log in again.');
-                        localStorage.removeItem('token');
-                        navigate('/admin-login');
-                    } else {
-                        alert('Some unknown error has occurred');
-                    }
-                }
-                navigate('/admin-login');
-                setLoading(false);
-            }
-        };
+        fetchDashboardData(navigate, setLoading);
 
-        fetchData();
+        const interval = setInterval(() => {
+            fetchDashboardData(navigate, setLoading);
+        }, 3600000);
 
-        const interval = setInterval(fetchData, 3600000);
         return () => clearInterval(interval);
     }, [navigate]);
 
     useEffect(() => {
-        const fetchOptions = async () => {
-            try {
-                const response = await axios.get('http://localhost:5000/college/college_list');
-                const tranformedOptions = response.data.college.map(college => ({
-                    label: college,
-                    value: college,
-                }));
-                setOptions(tranformedOptions);
-            } catch (error) {
-                console.log(error);
-                alert('Some unknown error occurred');
-            }
-        };
-        fetchOptions();
-    }, []);
+        fetchCollegeOptions(setOptions, navigate);
+    }, [navigate]);
 
     const handleOptionChange = (selectedOption) => {
         setOption(selectedOption.value);
@@ -79,10 +42,18 @@ const EditCollege = () => {
     };
     const handleEditedSubmit = async (e) => {
         e.preventDefault();
+        const showConfirmation = () =>
+            new Promise((resolve) => {
+                const userConfirmed = window.confirm("Submit the edited changes?");
+                resolve(userConfirmed);
+            });
         try {
-            const response = await axios.post('http://localhost:5000/admin/edit-college', collegeDetails);
-            alert(response.data)
-            navigate('/admin/dashboard')
+            const user = await showConfirmation();
+            if (user) {
+                const response = await axios.post('http://localhost:5000/admin/edit-college', collegeDetails);
+                alert(response.data)
+                navigate('/admin/dashboard')
+            } 
         } catch (error) {
             console.log(error);
         }

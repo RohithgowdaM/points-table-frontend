@@ -40,7 +40,7 @@ const AddCollege = () => {
             const token = localStorage.getItem('token');
             if (!token) {
                 setLoading(false);
-                navigate('/admin-login');
+                navigate('/admin/login');
                 return;
             }
 
@@ -56,13 +56,13 @@ const AddCollege = () => {
                     if (error.response.status === 401 && error.response.data.error === 'Token expired') {
                         alert('Session expired. Please log in again.');
                         localStorage.removeItem('token');
-                        navigate('/admin-login');
+                        navigate('/admin/login');
                     }
                     else {
                         alert('Some unknown error has been caused')
                     }
                 }
-                navigate('/admin-login');
+                navigate('/admin/login');
                 setLoading(false); // Stop loading after error handling
             }
         };

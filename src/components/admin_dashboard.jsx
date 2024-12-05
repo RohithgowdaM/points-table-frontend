@@ -15,7 +15,7 @@ const AdminDashboard = () => {
       const token = localStorage.getItem('token');
       if (!token) {
         setLoading(false);
-        navigate('/admin-login');
+        navigate('/admin/login');
         return;
       }
 
@@ -30,13 +30,13 @@ const AdminDashboard = () => {
           if (error.response.status === 401 && error.response.data.error === 'Token Expired') {
             alert('Session expired. Please log in again.');
             localStorage.removeItem('token');
-            navigate('/admin-login');
+            navigate('/admin/login');
           }
           else {
             alert('Some unknown error has been caused')
           }
         }
-        navigate('/admin-login');
+        navigate('/admin/login');
         setLoading(false);
       }
     };
@@ -60,17 +60,7 @@ const AdminDashboard = () => {
         </Link>
       </div>
       <div>
-        <Link to=''>
-          <button>Add Admin</button>
-        </Link>
-      </div>
-      <div>
-        <Link to=''>
-          <button>Forgot/change Password of admins</button>
-        </Link>
-      </div>
-      <div>
-        <Link to=''>
+        <Link to='/admin/changepasswordcollege'>
           <button>Forgot/Change Password of College</button>
         </Link>
       </div>
@@ -80,7 +70,9 @@ const AdminDashboard = () => {
         </Link>
       </div>
       <div>
-        <button>Delete College</button>
+        <Link to='/admin/deletecollege'>
+          <button>Delete College</button>
+        </Link>
       </div>
       <div>
         <button>Add Sport</button>
