@@ -3,6 +3,7 @@ import axios from "axios";
 import { fetchDashboardData, fetchCollegeOptions } from '../utils/apputils';
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select'
+import showConfirmation from "../utils/showConfirmation";
 
 const PasswordChangecollege = () => {
     const [options, setOptions] = useState([]);
@@ -48,13 +49,8 @@ const PasswordChangecollege = () => {
             return;
         }
         else {
-            const showConfirmation = () =>
-                new Promise((resolve) => {
-                  const userConfirmed = window.confirm("Confirm new password?");
-                  resolve(userConfirmed);
-                });
             try {
-                const user= await showConfirmation();
+                const user= showConfirmation("Confirm new password?");
                 if(user){
                 const response = await axios.post('http://localhost:5000/admin/change-college-password', {
                     soption: soption,

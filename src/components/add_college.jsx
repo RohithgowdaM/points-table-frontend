@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { useNavigate } from 'react-router-dom';
 import { indoorGamesList, outdoorGamesList, zone } from '../data/getOptions';
+import { fetchDashboardData } from '../utils/apputils';
+import showConfirmation from '../utils/showConfirmation'
 
 const AddCollege = () => {
     const [indoorGames, setIndoorGames] = useState([]);
@@ -24,53 +26,21 @@ const AddCollege = () => {
         total_strength_iii: 0,
         total_strength_iv: 0,
         total_strength_pg: 0,
-        ped_name:"",
-        ped_qualification:"",
-        ped_years_of_service:0,
-        ped_years_of_service_in_institute:0,
-        ped_contact:"",
-        ped_awards:"",
+        ped_name: "",
+        ped_qualification: "",
+        ped_years_of_service: 0,
+        ped_years_of_service_in_institute: 0,
+        ped_contact: "",
+        ped_awards: "",
         sports_dev_fees: 0,
         password: '',
         sports_facilities: '',
     });
 
     useEffect(() => {
-        const fetchData = async () => {
-            const token = localStorage.getItem('token');
-            if (!token) {
-                setLoading(false);
-                navigate('/admin/login');
-                return;
-            }
-
-            try {
-                console.log("Fetching dashboard data...");
-                const response = await axios.get('http://localhost:5000/admin/dashboard', {
-                    headers: { Authorization: token },
-                });
-                setLoading(false); // Stop loading after the API call completes
-            } catch (error) {
-                console.log("Message", error);
-                if (error.response) {
-                    if (error.response.status === 401 && error.response.data.error === 'Token expired') {
-                        alert('Session expired. Please log in again.');
-                        localStorage.removeItem('token');
-                        navigate('/admin/login');
-                    }
-                    else {
-                        alert('Some unknown error has been caused')
-                    }
-                }
-                navigate('/admin/login');
-                setLoading(false); // Stop loading after error handling
-            }
-        };
-
-        fetchData();
-
+        fetchDashboardData(navigate, setLoading);
         // Set interval to fetch data every hour (60 minutes = 3600000 ms)
-        const interval = setInterval(fetchData, 3600000);
+        const interval = setInterval(fetchDashboardData(navigate, setLoading), 3600000);
         return () => clearInterval(interval);
     }, [navigate]);
 
@@ -122,9 +92,12 @@ const AddCollege = () => {
         else {
             formData.sports_facilities = { indoorGames, outdoorGames };
             try {
-                const response = await axios.post('http://localhost:5000/admin/create-college', formData);
-                alert('College registered successfully')
-                navigate('/admin/dashboard')
+                const userResponse = showConfirmation('Are you sure the information entered are correct?');
+                if (userResponse) {
+                    const response = await axios.post('http://localhost:5000/admin/create-college', formData);
+                    alert('College registered successfully')
+                    navigate('/admin/dashboard')
+                }
             } catch (err) {
                 if (err.status === 409) { alert(err.response.data.error); }
                 console.log(err.response.data.error);

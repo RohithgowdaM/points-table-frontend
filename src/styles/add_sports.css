@@ -1,0 +1,157 @@
+/* General reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    color: #333;
+    flex-wrap: wrap;
+}
+
+.form-container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 900px;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #007bff;
+}
+
+.table-wrapper {
+    margin-top: 30px;
+    overflow-x: auto;
+    padding: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 400px;
+}
+
+.sports-table {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    border-collapse: collapse;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+}
+
+.sports-table th {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.sports-table td {
+    padding: 13px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.sports-table th {
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    /* Keep header above the body */
+}
+
+.sports-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.sports-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.college-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+label {
+    font-size: 16px;
+    color: #555;
+    width: 40%;
+    text-align: left;
+    font-weight: 600;
+    margin-bottom: 8px;
+    transition: color 0.3s ease-in-out;
+}
+
+label:hover {
+    color: #007bff;
+}
+
+input[type="text"] {
+    width: 55%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+input[type="text"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+.submit-group {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-btn {
+    padding: 12px 20px;
+    font-size: 16px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    width: 100%;
+    max-width: 150px;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+.search-input {
+    margin-bottom: 20px;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 250px;
+}
+
+.form-container {
+    padding-top: 20px;
+    ;
+}

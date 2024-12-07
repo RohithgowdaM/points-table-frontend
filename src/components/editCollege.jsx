@@ -5,6 +5,7 @@ import Select from "react-select";
 import { indoorGamesList, outdoorGamesList, zone } from '../data/getOptions';
 import '../styles/editCollege.css';
 import { fetchDashboardData, fetchCollegeOptions } from '../utils/apputils';
+import showConfirmation from "../utils/showConfirmation";
 
 const EditCollege = () => {
     const [options, setOptions] = useState([]);
@@ -42,15 +43,10 @@ const EditCollege = () => {
     };
     const handleEditedSubmit = async (e) => {
         e.preventDefault();
-        const showConfirmation = () =>
-            new Promise((resolve) => {
-                const userConfirmed = window.confirm("Submit the edited changes?");
-                resolve(userConfirmed);
-            });
         try {
-            const user = await showConfirmation();
+            const user = showConfirmation('Are you sure want to submit the edited changes?');
             if (user) {
-                const response = await axios.post('http://localhost:5000/admin/edit-college', collegeDetails);
+                const response = await axios.put('http://localhost:5000/admin/edit-college', collegeDetails);
                 alert(response.data)
                 navigate('/admin/dashboard')
             } 

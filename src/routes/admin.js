@@ -5,6 +5,7 @@ import AddCollege from '../components/add_college';
 import EditCollege from '../components/editCollege';
 import PasswordChangecollege from '../components/passwordChangeCollege';
 import DeleteCollege from '../components/deleteCollege';
+import AddSports from '../components/add_sports';
 
 const AdminRoutes = () => {
   return (
@@ -15,6 +16,7 @@ const AdminRoutes = () => {
       <Route path='/editcollege' element={<EditCollege />} />
       <Route path='/changepasswordcollege' element={<PasswordChangecollege />} />
       <Route path="/deletecollege" element={<DeleteCollege />} />
+      <Route path="/addsport" element={<AddSports />} />
     </Routes>
   );
 };

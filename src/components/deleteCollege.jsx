@@ -3,6 +3,7 @@ import { fetchDashboardData, fetchCollegeOptions } from '../utils/apputils';
 import { useNavigate } from "react-router-dom";
 import Select from 'react-select';
 import axios from "axios";
+import showConfirmation from "../utils/showConfirmation";
 
 const DeleteCollege = () => {
     const [options, setOptions] = useState([]);
@@ -21,15 +22,8 @@ const DeleteCollege = () => {
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
-        const showConfirmation = () =>
-          new Promise((resolve) => {
-            const userConfirmed = window.confirm("Are you sure want to delete the college?");
-            resolve(userConfirmed);
-          });
-      
         try {
-          const userResponse = await showConfirmation();
+          const userResponse = showConfirmation('Are you sure you want to delete this item?');
       
           if (userResponse) {
             const response = await axios.post('http://localhost:5000/admin/delete-college', { soption });
