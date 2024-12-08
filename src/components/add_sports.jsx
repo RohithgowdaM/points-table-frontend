@@ -15,7 +15,9 @@ const AddSports = () => {
 
     useEffect(() => {
         fetchDashboardData(navigate, setLoading);
-        const interval = setInterval(fetchDashboardData(navigate, setLoading), 3600000);
+        const interval = setInterval(() => {
+            fetchDashboardData(navigate, setLoading);
+        }, 3600000);
         return () => clearInterval(interval);
     }, [navigate]);
 

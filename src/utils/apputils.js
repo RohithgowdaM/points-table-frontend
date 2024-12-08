@@ -46,3 +46,20 @@ export const fetchCollegeOptions = async (setOptions, navigate) => {
         navigate('/admin/login');
     }
 };
+
+
+export const fetchCollegeid = async (setOptions, navigate, setFiltered) => {
+    try {
+        const response = await axios.post('http://localhost:5000/admin/get-collegeid');
+        const transformedOptions = response.data.college.map((col) => ({
+            label: col.college_name,
+            value: col.college_id,
+        }));
+        setFiltered(response.data.college);
+        setOptions(transformedOptions);
+    } catch (error) {
+        console.log(error);
+        alert('Some unknown error occurred');
+        navigate('/admin/dashboard');
+    }
+};

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import '../styles/collegeDashboard.css'
+import '../styles/collegeDashboard.css';
+import ViewTournament from "./viewTournaments";
+import {logout} from '../utils/logout'
 
 const CollegeDashboard = () => {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     const [collegeData, setCollegeData] = useState({});
+    const [currentView, setCurrentView] = useState("collegeDetails");
 
     useEffect(() => {
         const token = localStorage.getItem("token");
@@ -24,7 +27,6 @@ const CollegeDashboard = () => {
                 });
                 setCollegeData(response.data.college);
                 setLoading(false);
-                console.log(response.data.college);
             } catch (error) {
                 if (error.response && error.response.status === 401 && error.response.data.error === "Token Expired") {
                     alert("Session expired. Please login again");
@@ -44,8 +46,8 @@ const CollegeDashboard = () => {
         return <h1 className="loading">Loading...</h1>;
     }
 
-    return (
-        <div className="dashboard-container">
+    const renderCollegeDetails = () => (
+        <div className="college-details">
             <h1 className="dashboard-title">College Dashboard</h1>
             <table className="data-table">
                 <tbody>
@@ -60,38 +62,6 @@ const CollegeDashboard = () => {
                     <tr>
                         <th>Name of the Zone</th>
                         <td>{collegeData.name_of_the_zone}</td>
-                    </tr>
-                    <tr>
-                        <th>PED Awards</th>
-                        <td>{collegeData.ped_awards}</td>
-                    </tr>
-                    <tr>
-                        <th>PED Contact</th>
-                        <td>{collegeData.ped_contact}</td>
-                    </tr>
-                    <tr>
-                        <th>PED Name</th>
-                        <td>{collegeData.ped_name}</td>
-                    </tr>
-                    <tr>
-                        <th>PED Qualification</th>
-                        <td>{collegeData.ped_qualification}</td>
-                    </tr>
-                    <tr>
-                        <th>PED Years of Service</th>
-                        <td>{collegeData.ped_years_of_service}</td>
-                    </tr>
-                    <tr>
-                        <th>PED Years of Service in Institute</th>
-                        <td>{collegeData.ped_years_of_service_in_institute}</td>
-                    </tr>
-                    <tr>
-                        <th>Principal Contact Number</th>
-                        <td>{collegeData.principle_contact_number}</td>
-                    </tr>
-                    <tr>
-                        <th>Principal Name</th>
-                        <td>{collegeData.principle_name}</td>
                     </tr>
                     <tr>
                         <th>Sports Development Fees</th>
@@ -119,24 +89,65 @@ const CollegeDashboard = () => {
                     </tr>
                 </tbody>
             </table>
-
-            <div className="sports-facilities">
-                <h2>Sports Facilities</h2>
-                <div className="facilities-container">
-                    {collegeData.sports_facilities &&
-                        Object.entries(collegeData.sports_facilities).map(([facilityType, games]) => (
-                            <div key={facilityType} className="facility-card">
-                                <h3 className="facility-type">{facilityType.charAt(0).toUpperCase() + facilityType.slice(1)}</h3>
-                                <ul className="games-list">
-                                    {games.map((game, index) => (
-                                        <li key={index} className="game-item">{game}</li>
-                                    ))}
-                                </ul>
-                            </div>
-                        ))}
+            <div className="principal-ped-section">
+                <h2 className="section-title">Principal & PED Details</h2>
+                <div className="detail-group">
+                    <div className="detail-card">
+                        <h3 className="detail-title">Principal</h3>
+                        <div className="detail-content">
+                            <p><strong>Name:</strong> {collegeData.principle_name}</p>
+                            <p><strong>Contact Number:</strong> {collegeData.principle_contact_number}</p>
+                        </div>
+                    </div>
+                    <div className="detail-card">
+                        <h3 className="detail-title">PED</h3>
+                        <div className="detail-content">
+                            <p><strong>Name:</strong> {collegeData.ped_name}</p>
+                            <p><strong>Contact:</strong> {collegeData.ped_contact}</p>
+                            <p><strong>Awards:</strong> {collegeData.ped_awards}</p>
+                            <p><strong>Qualification:</strong> {collegeData.ped_qualification}</p>
+                            <p><strong>Years of Service:</strong> {collegeData.ped_years_of_service}</p>
+                            <p><strong>Years of Service in Institute:</strong> {collegeData.ped_years_of_service_in_institute}</p>
+                        </div>
+                    </div>
                 </div>
             </div>
 
+        </div>
+    );
+
+    const renderUpcomingEvents = () => (
+        <div className="upcoming-events">
+            <h1 className="dashboard-title">Upcoming Events</h1>
+            <ViewTournament />
+        </div>
+    );
+
+    return (
+        <div className="dashboard-container">
+            <nav className="navbar">
+                <div className="navbar-container">
+                    <a href="/" className="navbar-logo">College Portal</a>
+                    <div className="navbar-links">
+                        <a
+                            href="#"
+                            className={`navbar-link ${currentView === "collegeDetails" ? "active" : ""}`}
+                            onClick={() => setCurrentView("collegeDetails")}
+                        >
+                            Home
+                        </a>
+                        <a
+                            href="#"
+                            className={`navbar-link ${currentView === "upcomingEvents" ? "active" : ""}`}
+                            onClick={() => setCurrentView("upcomingEvents")}
+                        >
+                            Upcoming Events
+                        </a>
+                        <a onClick={()=>{logout();navigate('/')}} className="navbar-link">Logout</a>
+                    </div>
+                </div>
+            </nav>
+            {currentView === "collegeDetails" ? renderCollegeDetails() : renderUpcomingEvents()}
         </div>
     );
 };

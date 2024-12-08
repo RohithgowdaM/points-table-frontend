@@ -13,7 +13,9 @@ const AdminDashboard = () => {
 
     fetchDashboardData(navigate,setLoading);
 
-    const interval = setInterval(fetchDashboardData, 3600000);
+    const interval = setInterval(() => {
+      fetchDashboardData(navigate, setLoading);
+  }, 3600000);
     return () => clearInterval(interval);
   }, [navigate]);
 
@@ -50,10 +52,14 @@ const AdminDashboard = () => {
         </Link>
       </div>
       <div>
-        <button>Delete Sport</button>
+        <Link to='/admin/addtournament'>
+          <button>Enter Tournament Details</button>
+        </Link>
       </div>
       <div>
-        <button>Enter Tournament Details</button>
+        <Link to='/admin/edittournament'>
+          <button>Edit Tournament Details</button>
+        </Link>
       </div>
       <div>
         <button>Schedule Tournaments</button>

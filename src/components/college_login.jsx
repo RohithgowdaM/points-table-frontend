@@ -43,7 +43,6 @@ const CollegeLogin = () => {
     }
 
     const handleOptionChange = (selectedoption) => {
-        console.log(selectedoption.target);
         setOption(selectedoption.value);
     }
     const handleSubmit = async (e) => {
@@ -57,7 +56,6 @@ const CollegeLogin = () => {
                     soption: soption,
                     password, password,
                 })
-                console.log(response.data);
                 localStorage.setItem('token', response.data.token);
                 localStorage.setItem('userID', response.data.id);
                 navigate('/dashboard')

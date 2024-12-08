@@ -44,7 +44,7 @@ const EditCollege = () => {
     const handleEditedSubmit = async (e) => {
         e.preventDefault();
         try {
-            const user = showConfirmation('Are you sure want to submit the edited changes?');
+            const user = await showConfirmation('Are you sure want to submit the edited changes?');
             if (user) {
                 const response = await axios.put('http://localhost:5000/admin/edit-college', collegeDetails);
                 alert(response.data)

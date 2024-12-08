@@ -40,7 +40,9 @@ const AddCollege = () => {
     useEffect(() => {
         fetchDashboardData(navigate, setLoading);
         // Set interval to fetch data every hour (60 minutes = 3600000 ms)
-        const interval = setInterval(fetchDashboardData(navigate, setLoading), 3600000);
+        const interval = setInterval(() => {
+            fetchDashboardData(navigate, setLoading);
+        }, 3600000);
         return () => clearInterval(interval);
     }, [navigate]);
 
@@ -92,7 +94,7 @@ const AddCollege = () => {
         else {
             formData.sports_facilities = { indoorGames, outdoorGames };
             try {
-                const userResponse = showConfirmation('Are you sure the information entered are correct?');
+                const userResponse = await showConfirmation('Are you sure the information entered are correct?');
                 if (userResponse) {
                     const response = await axios.post('http://localhost:5000/admin/create-college', formData);
                     alert('College registered successfully')

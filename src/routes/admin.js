@@ -6,6 +6,8 @@ import EditCollege from '../components/editCollege';
 import PasswordChangecollege from '../components/passwordChangeCollege';
 import DeleteCollege from '../components/deleteCollege';
 import AddSports from '../components/add_sports';
+import AddTournament from '../components/addTournament';
+import EditTournament from '../components/editTournament';
 
 const AdminRoutes = () => {
   return (
@@ -17,6 +19,8 @@ const AdminRoutes = () => {
       <Route path='/changepasswordcollege' element={<PasswordChangecollege />} />
       <Route path="/deletecollege" element={<DeleteCollege />} />
       <Route path="/addsport" element={<AddSports />} />
+      <Route path="/addtournament" element={<AddTournament />} />
+      <Route path="/edittournament" element={<EditTournament />} />
     </Routes>
   );
 };

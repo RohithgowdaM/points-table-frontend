@@ -15,6 +15,10 @@ const PasswordChangecollege = () => {
 
     useEffect(() => {
         fetchDashboardData(navigate, setLoading);
+        const interval = setInterval(() => {
+            fetchDashboardData(navigate, setLoading);
+        }, 3600000);
+        return () => clearInterval(interval);
     }, [navigate]);
     useEffect(() => {
         fetchCollegeOptions(setOptions, navigate);
@@ -50,15 +54,15 @@ const PasswordChangecollege = () => {
         }
         else {
             try {
-                const user= showConfirmation("Confirm new password?");
-                if(user){
-                const response = await axios.post('http://localhost:5000/admin/change-college-password', {
-                    soption: soption,
-                    password: password,
-                })
-                alert(`Password Changed successfully`)
-                navigate('/admin/dashboard');
-            }
+                const user = await showConfirmation("Confirm new password?");
+                if (user) {
+                    const response = await axios.post('http://localhost:5000/admin/change-college-password', {
+                        soption: soption,
+                        password: password,
+                    })
+                    alert(`Password Changed successfully`)
+                    navigate('/admin/dashboard');
+                }
             } catch (error) {
                 alert('Some error occurred');
                 console.log(error)
