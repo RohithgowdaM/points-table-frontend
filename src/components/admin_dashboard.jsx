@@ -11,11 +11,11 @@ const AdminDashboard = () => {
     const id = localStorage.getItem('userID');
     setAdminID(id);
 
-    fetchDashboardData(navigate,setLoading);
+    fetchDashboardData(navigate, setLoading);
 
     const interval = setInterval(() => {
       fetchDashboardData(navigate, setLoading);
-  }, 3600000);
+    }, 3600000);
     return () => clearInterval(interval);
   }, [navigate]);
 
@@ -53,7 +53,7 @@ const AdminDashboard = () => {
       </div>
       <div>
         <Link to='/admin/addtournament'>
-          <button>Enter Tournament Details</button>
+          <button>Schedule Tournaments</button>
         </Link>
       </div>
       <div>
@@ -62,7 +62,9 @@ const AdminDashboard = () => {
         </Link>
       </div>
       <div>
-        <button>Schedule Tournaments</button>
+        <Link to='/admin/entertournamentdetails'>
+          <button>Enter Tournament Details</button>
+        </Link>
       </div>
     </div>
   );

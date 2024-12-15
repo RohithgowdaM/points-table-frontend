@@ -16,7 +16,7 @@ const ViewTournament = () => {
         fetchCollegeid(setColleges, navigate, setFull);
         const fetchData = async () => {
             try {
-                const response = await axios.get("http://localhost:5000/admin/fetch-tournament");
+                const response = await axios.get("http://localhost:5000/admin/fetch-all-tournament");
                 setEvents(response.data);
                 setLoading(false);
             } catch (error) {

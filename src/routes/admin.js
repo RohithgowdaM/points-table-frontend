@@ -8,6 +8,7 @@ import DeleteCollege from '../components/deleteCollege';
 import AddSports from '../components/add_sports';
 import AddTournament from '../components/addTournament';
 import EditTournament from '../components/editTournament';
+import EnterTournamentDetails from '../components/enterTournamentDetails'
 
 const AdminRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AdminRoutes = () => {
       <Route path="/addsport" element={<AddSports />} />
       <Route path="/addtournament" element={<AddTournament />} />
       <Route path="/edittournament" element={<EditTournament />} />
+      <Route path="/entertournamentdetails" element={<EnterTournamentDetails />} />
     </Routes>
   );
 };
